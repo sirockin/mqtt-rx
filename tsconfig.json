@@ -1,29 +1,14 @@
 {
   "compilerOptions": {
-    "module": "es2015",
-    "target": "es5",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
+    "target": "es6",
     "declaration": true,
-    "sourceMap": true,
-    "moduleResolution": "node",
-    "lib": [
-      "es2017",
-      "dom"
-    ],
-    "typeRoots": [
-      "node_modules/@types"
-    ]
+    "module": "commonjs",
+    "outDir": "./dist"
   },
-  "files": [
-    "./src/index.ts",
-    "./src/mqtt.model.ts",
-    "./src/mqtt.module.ts",
-    "./src/mqtt.service.ts",
-    "./tests/mqtt.service.spec.ts"
+  "include": [
+    "src/**/*.ts"
   ],
-  "angularCompilerOptions": {
-    "strictMetadataEmit": true,
-    "skipTemplateCodegen": true
-  }
+  "exclude": [
+    "node_modules"
+  ]
 }

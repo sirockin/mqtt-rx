@@ -1,10 +1,8 @@
-import { TestBed } from '@angular/core/testing';
-
 import { skip, map, mergeMap, scan } from 'rxjs/operators';
 import { noop, Subscription, of } from 'rxjs';
 
 import { MqttService } from '../src/mqtt.service';
-import { MqttServiceConfig, MqttClientService } from '../src/mqtt.module';
+// import { MqttServiceConfig, MqttClientService } from '../src/mqtt.module';
 import {
   IMqttMessage,
   IMqttServiceOptions,
@@ -19,6 +17,7 @@ const config: IMqttServiceOptions = {
   connectOnCreate: true,
   hostname: 'localhost',
   port: 9001,
+  protocol:"ws",
   path: ''
 };
 
@@ -29,7 +28,7 @@ let mqttService: MqttService;
 beforeEach(() => {
   originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
   jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
-
+/*
   TestBed.configureTestingModule({
     providers: [
       {
@@ -43,6 +42,8 @@ beforeEach(() => {
     ]
   });
   mqttService = TestBed.get(MqttService);
+  */
+  mqttService = new MqttService(config);
 });
 
 afterEach(() => {

@@ -1,6 +1,7 @@
-import { EventEmitter, Inject, Injectable } from '@angular/core';
+import { EventEmitter } from '@angular/core';
+// const EventEmitter = require('events');
 import { ISubscriptionGrant, IClientSubscribeOptions } from 'mqtt';
-import { connect } from '../vendor/mqtt.min.js';
+import { connect } from 'mqtt';
 import * as extend from 'xtend';
 
 import {
@@ -35,16 +36,16 @@ import {
   MqttConnectionState
 } from './mqtt.model';
 
-import { MqttServiceConfig, MqttClientService } from './index';
-
 /**
  * With an instance of MqttService, you can observe and subscribe to MQTT in multiple places, e.g. in different components,
  * to only subscribe to the broker once per MQTT filter.
  * It also handles proper unsubscription from the broker, if the last observable with a filter is closed.
  */
+/*
 @Injectable({
   providedIn: 'root',
 })
+*/
 export class MqttService {
   /** a map of all mqtt observables by filter */
   public observables: { [filter: string]: Observable<IMqttMessage> } = {};
@@ -75,8 +76,8 @@ export class MqttService {
    * should be established on creation of this service or not.
    */
   constructor(
-    @Inject(MqttServiceConfig) private options: IMqttServiceOptions,
-    @Inject(MqttClientService) private client?: IMqttClient
+    /*@Inject(MqttServiceConfig)*/ private options: IMqttServiceOptions,
+    /*@Inject(MqttClientService)*/ private client?: IMqttClient
   ) {
     if (options.connectOnCreate !== false) {
       this.connect({}, client);
@@ -90,9 +91,9 @@ export class MqttService {
    */
   public connect(opts?: IMqttServiceOptions, client?: IMqttClient) {
     const options = extend(this.options || {}, opts);
-    const protocol = options.protocol || 'ws';
+    const protocol = options.protocol || 'mqtt';
     const hostname = options.hostname || 'localhost';
-    const port = options.port || 1884;
+    const port = options.port || 1883;
     const path = options.path || '/';
     this._url = `${protocol}://${hostname}:${port}/${path}`;
     this.state.next(MqttConnectionState.CONNECTING);
