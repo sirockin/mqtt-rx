@@ -1,4 +1,6 @@
-/*  This is a copy of the original set of tests from ngx-mqtt mqtt.service.spec.ts
+/// <reference path="../node_modules/@types/jasmine/index.d.ts" />
+
+/*  This is a copy of the original set of tests from rx-mqtt mqtt.service.spec.ts
 *   but using tcp on port 1883
 *   Currently this causes some error tracing "Cannot call write after a stream was destroyed"
 *   but all tests apart from #onError (which fails because of the above) pass.

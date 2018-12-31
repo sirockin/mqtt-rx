@@ -1,11 +1,14 @@
-# ngx-mqtt [![npm](https://img.shields.io/npm/v/ngx-mqtt.svg)](https://www.npmjs.com/package/ngx-mqtt) [![Travis](https://img.shields.io/travis/sclausen/ngx-mqtt.svg)](https://travis-ci.org/sclausen/ngx-mqtt)
+# rx-mqtt  [![npm](https://img.shields.io/npm/v/rx-mqtt.svg)](https://www.npmjs.com/package/rx-mqtt) 
 
-This library isn't just a wrapper around MQTT.js for angular >= 2.
+This library has been forked with the permission of the creator from v6.8.2 of  [ngx-mqtt](https://github.com/sclausen/ngx-mqtt). I've very grateful for this.
+
+Like its parent it provides a [ReactiveX](http://reactivex.io/) wrapper around the [Mqtt.js](https://www.npmjs.com/package/mqtt) library, with an identical API but for server-side use so:
+1. Without the Angular dependency
+1. Directly importing the [Mqtt.js](https://www.npmjs.com/package/mqtt) library
+1. Allowing use of all the transports provided by [Mqtt.js](https://www.npmjs.com/package/mqtt)
+
 It uses observables and takes care of subscription handling and message routing.
 
-For reasons of convenience, I removed the copied typings from mqtt.js and added it as a dev-dependency while still bundling the browserified latest version of it.
-This means although you have the possibility to use `mqtt`, `mqtts`, `tcp`, `ssl`, `wx` or `wxs` as the protocol in the client options, you can't, because this is a browser library where you can't conntect with something other than websockets. You also can't use `key`, `cert` and `ca` for the same reasons.
+To keep the codebase as similar as possible to its parent while removing the Angular dependency, I have copied the `EventEmitter` implementation from the Angular source.
 
-If you have any issues using this library, please visit it's [homepage](https://sclausen.github.io/ngx-mqtt/) and look for similar issues in the issue tracker before you file a bug.
-
-## **ngx-mqtt >= 6 is only compatible with angular >= 6**
+Since I am still carrying out integration tests, it is not yet production-ready. I also haven't yet done a comprehensive audit so it's possible there are obsolete code and config files hanging around.

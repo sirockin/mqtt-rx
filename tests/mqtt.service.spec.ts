@@ -1,4 +1,6 @@
-/*  This is the original set of tests from ngx-mqtt, which uses ws on port 9001
+/// <reference path="../node_modules/@types/jasmine/index.d.ts" />
+
+/*  This is the original set of tests from rx-mqtt, which uses ws on port 9001
 */
 
 import { skip, map, mergeMap, scan } from 'rxjs/operators';

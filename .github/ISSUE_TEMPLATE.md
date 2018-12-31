@@ -32,8 +32,8 @@ Bug reports not having a reproduction will from now on immediately being closed!
 ## Environment
 
 <pre><code>
-ngx-mqtt version: X.Y.Z
-<!-- Check whether this is still an issue in the most recent ngx-mqtt version -->
+rx-mqtt version: X.Y.Z
+<!-- Check whether this is still an issue in the most recent rx-mqtt version -->
 
 - Broker <!-- Hummingbird, HiveMQ, Mosquitto, etc. -->
 
