@@ -1,5 +1,5 @@
 {
-  "name": "rxjs-mqtt",
+  "name": "mqtt-rx",
   "version": "0.0.1",
   "description": "ReactiveX MQTT client library",
   "readme": "README.md",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sirockin/rxjs-mqtt.git"
+    "url": "https://github.com/sirockin/mqtt-rx.git"
   },
   "keywords": [
     "rx",

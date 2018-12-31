@@ -1,6 +1,6 @@
 /// <reference path="../node_modules/@types/jasmine/index.d.ts" />
 
-/*  This is the original set of tests from rxjs-mqtt, which uses ws on port 9001
+/*  This is the original set of tests from mqtt-rx, which uses ws on port 9001
 */
 
 import { skip, map, mergeMap, scan } from 'rxjs/operators';
@@ -90,14 +90,14 @@ describe('MqttService using WS', () => {
   });
 
   it('#publish', (done) => {
-    mqttService.observe('rxjs-mqtt/tests/ws/publish/' + currentUuid).subscribe((_: IMqttMessage) => {
+    mqttService.observe('mqtt-rx/tests/ws/publish/' + currentUuid).subscribe((_: IMqttMessage) => {
       done();
     });
-    mqttService.publish('rxjs-mqtt/tests/ws/publish/' + currentUuid, 'publish').subscribe(noop);
+    mqttService.publish('mqtt-rx/tests/ws/publish/' + currentUuid, 'publish').subscribe(noop);
   });
 
   it('#pipeablePublish', (done) => {
-    mqttService.observe('rxjs-mqtt/tests/ws/pipeablePublish/' + currentUuid).pipe(
+    mqttService.observe('mqtt-rx/tests/ws/pipeablePublish/' + currentUuid).pipe(
       scan<IMqttMessage, number>(acc => { return acc + 1; }, 0)
     ).subscribe(count => {
       if (count === 3) {
@@ -105,17 +105,17 @@ describe('MqttService using WS', () => {
       }
     });
     of(null).pipe(
-      mergeMap(i => mqttService.publish('rxjs-mqtt/tests/ws/pipeablePublish/' + currentUuid, 'publish1')),
-      mergeMap(i => mqttService.publish('rxjs-mqtt/tests/ws/pipeablePublish/' + currentUuid, 'publish2')),
-      mergeMap(i => mqttService.publish('rxjs-mqtt/tests/ws/pipeablePublish/' + currentUuid, 'publish3'))
+      mergeMap(i => mqttService.publish('mqtt-rx/tests/ws/pipeablePublish/' + currentUuid, 'publish1')),
+      mergeMap(i => mqttService.publish('mqtt-rx/tests/ws/pipeablePublish/' + currentUuid, 'publish2')),
+      mergeMap(i => mqttService.publish('mqtt-rx/tests/ws/pipeablePublish/' + currentUuid, 'publish3'))
     ).subscribe();
   });
 
   it('#unsafePublish', (done) => {
-    mqttService.observe('rxjs-mqtt/tests/ws/unsafePublish/' + currentUuid).subscribe((_: IMqttMessage) => {
+    mqttService.observe('mqtt-rx/tests/ws/unsafePublish/' + currentUuid).subscribe((_: IMqttMessage) => {
       done();
     });
-    mqttService.unsafePublish('rxjs-mqtt/tests/ws/unsafePublish/' + currentUuid, 'unsafePublish');
+    mqttService.unsafePublish('mqtt-rx/tests/ws/unsafePublish/' + currentUuid, 'unsafePublish');
   });
 
 
@@ -171,7 +171,7 @@ describe('MqttService using WS', () => {
 describe('MqttService using WS Retained Behavior', () => {
   it('emit the retained message for all current and new subscribers', (done) => {
     let counter = 0;
-    const topic = 'rxjs-mqtt/tests/ws/retained/' + currentUuid;
+    const topic = 'mqtt-rx/tests/ws/retained/' + currentUuid;
     const mqttSubscriptions: IMqttSubscription[] = [];
 
     function observe(): void {
@@ -208,7 +208,7 @@ describe('MqttService using WS Retained Behavior', () => {
   });
 
   it('do not emit not retained message on late subscribe', (done) => {
-    const topic = 'rxjs-mqtt/tests/ws/notRetained/' + currentUuid;
+    const topic = 'mqtt-rx/tests/ws/notRetained/' + currentUuid;
     let lateMessage: IMqttMessage; // this message should never occur
     mqttService.observe(topic).subscribe((msg1: IMqttMessage) => {
       expect(msg1).toBeDefined();

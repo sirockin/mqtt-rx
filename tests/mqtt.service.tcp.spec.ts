@@ -1,6 +1,6 @@
 /// <reference path="../node_modules/@types/jasmine/index.d.ts" />
 
-/*  This is a copy of the original set of tests from rxjs-mqtt mqtt.service.spec.ts
+/*  This is a copy of the original set of tests from mqtt-rx mqtt.service.spec.ts
 *   but using tcp on port 1883
 *   Currently this causes some error tracing "Cannot call write after a stream was destroyed"
 *   but all tests apart from #onError (which fails because of the above) pass.
@@ -100,14 +100,14 @@ describe('MqttService using TCP', () => {
   });
 
   it('#publish', (done) => {
-    mqttService.observe('rxjs-mqtt/tests/tcp/publish/' + currentUuid).subscribe((_: IMqttMessage) => {
+    mqttService.observe('mqtt-rx/tests/tcp/publish/' + currentUuid).subscribe((_: IMqttMessage) => {
       done();
     });
-    mqttService.publish('rxjs-mqtt/tests/tcp/publish/' + currentUuid, 'publish').subscribe(noop);
+    mqttService.publish('mqtt-rx/tests/tcp/publish/' + currentUuid, 'publish').subscribe(noop);
   });
 
   it('#pipeablePublish', (done) => {
-    mqttService.observe('rxjs-mqtt/tests/tcp/pipeablePublish/' + currentUuid).pipe(
+    mqttService.observe('mqtt-rx/tests/tcp/pipeablePublish/' + currentUuid).pipe(
       scan<IMqttMessage, number>(acc => { return acc + 1; }, 0)
     ).subscribe(count => {
       if (count === 3) {
@@ -115,17 +115,17 @@ describe('MqttService using TCP', () => {
       }
     });
     of(null).pipe(
-      mergeMap(i => mqttService.publish('rxjs-mqtt/tests/tcp/pipeablePublish/' + currentUuid, 'publish1')),
-      mergeMap(i => mqttService.publish('rxjs-mqtt/tests/tcp/pipeablePublish/' + currentUuid, 'publish2')),
-      mergeMap(i => mqttService.publish('rxjs-mqtt/tests/tcp/pipeablePublish/' + currentUuid, 'publish3'))
+      mergeMap(i => mqttService.publish('mqtt-rx/tests/tcp/pipeablePublish/' + currentUuid, 'publish1')),
+      mergeMap(i => mqttService.publish('mqtt-rx/tests/tcp/pipeablePublish/' + currentUuid, 'publish2')),
+      mergeMap(i => mqttService.publish('mqtt-rx/tests/tcp/pipeablePublish/' + currentUuid, 'publish3'))
     ).subscribe();
   });
 
   it('#unsafePublish', (done) => {
-    mqttService.observe('rxjs-mqtt/tests/tcp/unsafePublish/' + currentUuid).subscribe((_: IMqttMessage) => {
+    mqttService.observe('mqtt-rx/tests/tcp/unsafePublish/' + currentUuid).subscribe((_: IMqttMessage) => {
       done();
     });
-    mqttService.unsafePublish('rxjs-mqtt/tests/tcp/unsafePublish/' + currentUuid, 'unsafePublish');
+    mqttService.unsafePublish('mqtt-rx/tests/tcp/unsafePublish/' + currentUuid, 'unsafePublish');
   });
 
 
@@ -181,7 +181,7 @@ describe('MqttService using TCP', () => {
 describe('MqttService using TCP Retained Behavior', () => {
   it('emit the retained message for all current and new subscribers', (done) => {
     let counter = 0;
-    const topic = 'rxjs-mqtt/tests/tcp/retained/' + currentUuid;
+    const topic = 'mqtt-rx/tests/tcp/retained/' + currentUuid;
     const mqttSubscriptions: IMqttSubscription[] = [];
 
     function observe(): void {
@@ -218,7 +218,7 @@ describe('MqttService using TCP Retained Behavior', () => {
   });
 
   it('do not emit not retained message on late subscribe', (done) => {
-    const topic = 'rxjs-mqtt/tests/tcp/notRetained/' + currentUuid;
+    const topic = 'mqtt-rx/tests/tcp/notRetained/' + currentUuid;
     let lateMessage: IMqttMessage; // this message should never occur
     mqttService.observe(topic).subscribe((msg1: IMqttMessage) => {
       expect(msg1).toBeDefined();
