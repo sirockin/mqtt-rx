@@ -1,5 +1,4 @@
-import { EventEmitter } from '@angular/core';
-// const EventEmitter = require('events');
+import { EventEmitter } from './event-emitter';
 import { ISubscriptionGrant, IClientSubscribeOptions } from 'mqtt';
 import { connect } from 'mqtt';
 import * as extend from 'xtend';
