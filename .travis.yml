@@ -10,7 +10,6 @@ branches:
 services:
   - docker
 before_install:
-  - export CHROME_BIN=chromium-browser
   - docker pull eclipse-mosquitto
   - docker run -d -p 9001:9001 -v $(pwd)/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro eclipse-mosquitto
 

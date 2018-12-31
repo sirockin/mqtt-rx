@@ -1,4 +1,4 @@
-# rx-mqtt  [![npm](https://img.shields.io/npm/v/rx-mqtt.svg)](https://www.npmjs.com/package/rx-mqtt) 
+# rxjs-mqtt  [![npm](https://img.shields.io/npm/v/rxjs-mqtt.svg)](https://www.npmjs.com/package/rxjs-mqtt) 
 
 This library has been forked with the permission of the creator from v6.8.2 of  [ngx-mqtt](https://github.com/sclausen/ngx-mqtt). I've very grateful for this.
 
