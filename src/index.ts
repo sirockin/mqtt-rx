@@ -1,4 +1,5 @@
 import { MqttService } from './mqtt.service';
+import { IClientSubscribeOptions } from 'mqtt'
 import { IMqttServiceOptions, 
             MqttConnectionState,
             IMqttMessage, 
@@ -15,6 +16,7 @@ import { IMqttServiceOptions,
 export{
     MqttService,
     IMqttClient,
+    IClientSubscribeOptions,
     MqttConnectionState,
     IMqttServiceOptions,
     IMqttMessage,

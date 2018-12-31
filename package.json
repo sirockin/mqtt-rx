@@ -1,6 +1,6 @@
 {
   "name": "mqtt-rx",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "ReactiveX MQTT client library",
   "readme": "README.md",
   "main": "dist/index.js",

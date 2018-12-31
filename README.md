@@ -12,3 +12,42 @@ It uses observables and takes care of subscription handling and message routing.
 To keep the codebase as similar as possible to its parent while removing the Angular dependency, I have copied the `EventEmitter` implementation from the Angular source.
 
 Since I am still carrying out integration tests, it is not yet production-ready. I also haven't yet done a comprehensive audit so it's possible there are obsolete code and config files hanging around.
+
+## Usage
+
+```TypeScript
+import { Subscription } from 'rxjs';
+
+import {
+  IMqttMessage,
+  MqttService,
+  IMqttServiceOptions
+} from 'mqtt-rx';
+
+export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
+  hostname: 'localhost',
+  port: 1883,
+  path: '/mqtt'
+};
+
+export class ExampleComponent {
+  private subscription: Subscription;
+  public message: string;
+  private _mqttService: MqttService;
+
+  constructor() {
+    this._mqttService = new MqttService(MQTT_SERVICE_OPTIONS);
+    this.subscription = this._mqttService.observe('my/topic').subscribe((message: IMqttMessage) => {
+      this.message = message.payload.toString();
+    });
+  }
+
+  public unsafePublish(topic: string, message: string): void {
+    this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
+  }
+
+  public destroy() {
+    this.subscription.unsubscribe();
+  }
+}
+```
