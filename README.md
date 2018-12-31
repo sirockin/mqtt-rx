@@ -48,6 +48,7 @@ export class ExampleComponent {
 
   public destroy() {
     this.subscription.unsubscribe();
+    this._mqttService.disconnect();
   }
 }
 ```
