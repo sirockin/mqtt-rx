@@ -11,7 +11,7 @@ services:
   - docker
 before_install:
   - docker pull eclipse-mosquitto
-  - docker run -d -p 9001:9001 -v $(pwd)/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro eclipse-mosquitto
+  - docker run -d -p 1883:1883 -p 9001:9001 -v $(pwd)/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro eclipse-mosquitto
 
 before_script:
   - export DISPLAY=:99.0
